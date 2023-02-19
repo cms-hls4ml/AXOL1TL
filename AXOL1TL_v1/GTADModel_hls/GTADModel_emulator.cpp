@@ -1,10 +1,10 @@
-#include "firmware/anomaly_detection.h"
+#include "firmware/GTADModel.h"
 #include "../emulator.h"
 #include "firmware/nnet_utils/nnet_common.h"
 #include <any>
 #include "ap_fixed.h"
 
-class anomaly_detection_model : public HLS4MLModel {
+class GTADModel_model : public HLS4MLModel {
 private:
     input_t _input[N_INPUT_1_1];
     result_t _result[N_LAYER_6];
@@ -17,7 +17,7 @@ public:
   }
     
   virtual void predict() {
-    anomaly_detection(_input, _result);
+    GTADModel(_input, _result);
   }
   
   virtual void read_result(std::any result) {
@@ -50,7 +50,7 @@ public:
 };
 
 extern "C" HLS4MLModel* create_model() {
-    return new anomaly_detection_model;
+    return new GTADModel_model;
 }
 
 extern "C" void destroy_model(HLS4MLModel* m) {

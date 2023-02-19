@@ -5,7 +5,7 @@ CFLAGS="-O3 -fPIC -std=c++17"
 
 LDFLAGS=
 INCFLAGS="-I../ap_types/"
-PROJECT=anomaly_detection
+PROJECT=GTADModel
 
 ${CC} ${CFLAGS} ${INCFLAGS} -c firmware/${PROJECT}.cpp -o ${PROJECT}.o
 ${CC} ${CFLAGS} ${INCFLAGS} -c ${PROJECT}_emulator.cpp -o ${PROJECT}_emulator.o

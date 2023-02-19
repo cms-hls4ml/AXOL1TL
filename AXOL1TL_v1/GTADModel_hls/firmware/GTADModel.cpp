@@ -18,10 +18,10 @@
 //
 #include <iostream>
 
-#include "anomaly_detection.h"
+#include "GTADModel.h"
 #include "parameters.h"
 
-void anomaly_detection(
+void GTADModel(
     input_t _input[N_INPUT_1_1],
     result_t _result[N_LAYER_6]
 ) {

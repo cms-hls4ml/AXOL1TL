@@ -27,9 +27,9 @@
 #include "defines.h"
 
 // Prototype of top level function for C-synthesis
-void jet_tagger(
-    input_t fc1_input[N_INPUT_1_1],
-    result_t layer16_out[N_LAYER_14]
-);
+void GTADModel(
+	       input_t _input[N_INPUT_1_1],
+	       result_t _result[N_LAYER_6]
+	       );
 
 #endif
