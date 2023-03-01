@@ -1,6 +1,6 @@
-#include "firmware/GTADModel.h"
-#include "../emulator.h"
-#include "firmware/nnet_utils/nnet_common.h"
+#include "NN/GTADModel.h"
+#include "emulator.h"
+#include "NN/nnet_utils/nnet_common.h"
 #include <any>
 #include "ap_fixed.h"
 
