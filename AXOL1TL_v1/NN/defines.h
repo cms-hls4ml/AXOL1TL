@@ -39,5 +39,6 @@ typedef ap_uint<1> layer6_index;
 typedef ap_fixed<10,7> result_t;
 typedef ap_fixed<18,8> mu_quantized_bits_table_t;
 typedef ap_ufixed<18,14> resultsq_t;
+typedef ap_fixed<18,13> unscaled_t;
 
 #endif
