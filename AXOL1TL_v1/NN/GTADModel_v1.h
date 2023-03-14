@@ -27,7 +27,7 @@
 #include "defines.h"
 
 // Prototype of top level function for C-synthesis
-void GTADModel(
+void GTADModel_v1(
 	       input_t _input[N_INPUT_1_1],
 	       result_t _result[N_LAYER_6]
 	       );

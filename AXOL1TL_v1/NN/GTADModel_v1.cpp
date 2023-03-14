@@ -18,10 +18,10 @@
 //
 #include <iostream>
 
-#include "GTADModel.h"
+#include "GTADModel_v1.h"
 #include "parameters.h"
 
-void GTADModel(
+void GTADModel_v1(
     input_t _input[N_INPUT_1_1],
     result_t _result[N_LAYER_6]
 ) {

@@ -1,7 +1,7 @@
 #ifndef __ADT_SCALES_H
 #define __ADT_SCALES_H
 
-#include "NN/GTADModel.h"
+#include "NN/GTADModel_v1.h"
 
 //N_INPUT_1_1=AD_NNNINPUTS
 static const int32_t ad_shift[N_INPUT_1_1] = {

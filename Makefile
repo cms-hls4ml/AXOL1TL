@@ -7,7 +7,7 @@ HLS_ROOT := ../../hls
 HLS4ML_INCLUDE := $(EMULATOR_EXTRAS)/include/hls4ml
 INCLUDES := -I$(HLS4ML_INCLUDE) -I$(AP_TYPES) -I$(HLS_ROOT)/include
 LD_FLAGS := -L$(EMULATOR_EXTRAS)/lib64 -lemulator_interface
-ALL_VERSIONS:=AXOL1TL_v1/GTADModel.so
+ALL_VERSIONS:=AXOL1TL_v1/GTADModel_v1.so
 
 .DEFAULT_GOAL := all
 .PHONY: all clean install
@@ -19,10 +19,10 @@ all: $(ALL_VERSIONS)
 install: all
 	@rm -rf $(PREFIX)/lib64
 	@mkdir -p $(PREFIX)/lib64
-	cp GTADModel*.so $(PREFIX)/lib64
+	cp GTADModel_v1*.so $(PREFIX)/lib64
 
 %.so:
 	$(MAKE) -C $(@D) INCLUDES="$(INCLUDES)" LD_FLAGS="$(LD_FLAGS)" CXXFLAGS="$(CXXFLAGS)"
 
 clean:
-	rm GTADModel*.so
+	rm GTADModel_v1*.so

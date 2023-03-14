@@ -1,4 +1,4 @@
-#include "NN/GTADModel.h"
+#include "NN/GTADModel_v1.h"
 #include "emulator.h"
 #include "NN/nnet_utils/nnet_common.h"
 #include <any>
@@ -16,7 +16,7 @@
 //AD_NNNOUTPUTS = N_LAYER_6 = 13
 //AD_NNNINPUTS = N_INPUT_1_1 = 57
 
-class GTADModel_model : public HLS4MLModel {
+class GTADModel_emulator_v1 : public hls4mlEmulator::Model {
 
 private:
     input_t _input[N_INPUT_1_1];
@@ -41,13 +41,13 @@ public:
     //then fill scaled inputs
     for (int i = 0; i < N_INPUT_1_1; i++) { 
       // _input[i] = std::any_cast<input_t>(scaled_input[i]) 
-      _input[i] = scaled_input[i] //dont think any_cast needed here but correct me if I'm wrong
+      _input[i] = scaled_input[i]; //dont think any_cast needed here but correct me if I'm wrong
     }
     
   }
     
   virtual void predict() {
-    GTADModel(_input, _result);
+    GTADModel_v1(_input, _result);
   }
   
   virtual void read_result(std::any result) {
@@ -87,7 +87,7 @@ public:
 };
 
 extern "C" hls4mlEmulator::Model* create_model() {
-    return new GTADModel_model;
+    return new GTADModel_emulator_v1;
 }
 
 extern "C" void destroy_model(hls4mlEmulator::Model* m) {
