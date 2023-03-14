@@ -10,4 +10,4 @@ GTADModel_v1.so: GTADModel_emulator_v1.o GTADModel_v1.o
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	rm GTADModel_v1.so
+	rm GTADModel_emulator_v1.o GTADModel_v1.o GTADModel_v1.so
