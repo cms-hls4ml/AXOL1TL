@@ -45,10 +45,14 @@ public:
     }
     
   }
-    
+
+
+  
   virtual void predict() {
     GTADModel_v1(_input, _result);    
   }
+
+
   
   virtual void read_result(std::any result) {
     //original just read result
@@ -58,15 +62,17 @@ public:
     // }
 
     //new: compute loss to read result
-    result_t result_p[N_LAYER_6]; //store preloss _result in result_p
+    result_t result_p[N_LAYER_6]; //store preloss _result in result_p, maybe not needed
     for (int i = 0; i < N_LAYER_6; i++) {
       result_p[i] = _result[i];
     }    
-    resultsq_t *loss = std::any_cast<resultsq_t*>(result); 
-    loss = computeLoss(result_p); 
-    //so result output is now the loss
+    // resultsq_t *loss = std::any_cast<resultsq_t*>(result);  //causes ambiguous conversion error
+    resultsq_t loss = computeLoss(result_p);
+    result = loss; //so output loss as "result"
   }
 
+
+  
   //scaleNNInputs function from https://github.com/cms-l1-globaltrigger/mp7_ugt_legacy/blob/anomaly_detection_trigger/firmware/hls/anomaly_detection/anomaly_detection.cpp#L28
   virtual void scaleNNInputs(unscaled_t unscaled[N_INPUT_1_1], input_t scaled[N_INPUT_1_1])
   {
