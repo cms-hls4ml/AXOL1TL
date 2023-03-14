@@ -41,7 +41,7 @@ public:
   
   virtual void read_loss(std::any loss) {
     resultsq_t *loss_p = std::any_cast<resultsq_t*>(loss);
-    loss_p = _loss;
+    loss_p[0] = _loss;
   }
   
   // scaleNNInputs function from
