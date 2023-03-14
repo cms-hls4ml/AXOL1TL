@@ -47,14 +47,24 @@ public:
   }
     
   virtual void predict() {
-    GTADModel_v1(_input, _result);
+    GTADModel_v1(_input, _result);    
   }
   
   virtual void read_result(std::any result) {
-    result_t *result_p = std::any_cast<result_t*>(result);
+    //original just read result
+    // result_t *result_p = std::any_cast<result_t*>(result);
+    // for (int i = 0; i < N_LAYER_6; i++) {
+    //   result_p[i] = _result[i];
+    // }
+
+    //new: compute loss to read result
+    result_t result_p[N_LAYER_6]; //store preloss _result in result_p
     for (int i = 0; i < N_LAYER_6; i++) {
       result_p[i] = _result[i];
-    }
+    }    
+    resultsq_t *loss = std::any_cast<resultsq_t*>(result); 
+    loss = computeLoss(result_p); 
+    //so result output is now the loss
   }
 
   //scaleNNInputs function from https://github.com/cms-l1-globaltrigger/mp7_ugt_legacy/blob/anomaly_detection_trigger/firmware/hls/anomaly_detection/anomaly_detection.cpp#L28
@@ -70,13 +80,13 @@ public:
 
 
   // computeLoss function from https://github.com/cms-l1-globaltrigger/mp7_ugt_legacy/blob/anomaly_detection_trigger/firmware/hls/anomaly_detection/anomaly_detection.cpp#L7
-  virtual resultsq_t computeLoss(std::any result) { 
-      result_t *result_p = std::any_cast<result_t*>(result); 
+  virtual resultsq_t computeLoss(result_t result_p[N_LAYER_6]) { 
+    //      result_t *result_p = std::any_cast<result_t*>(result); 
       resultsq_t squares[N_LAYER_6];
       resultsq_t square_sum;
 
       for (int i = 0; i < N_LAYER_6; i++) { 
-	result_p[i] = _result[i];
+	// result_p[i] = _result[i]; //not needed, should already be the case
 	resultsq_t sq  = result_p[i] * result_p[i];
 	squares[i] = sq;
       }
