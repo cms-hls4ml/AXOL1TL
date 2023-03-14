@@ -20,7 +20,7 @@ public:
     
     // first get unscaled inputs
     for (int i = 0; i < N_INPUT_1_1; i++) {
-      unscaled_input[i] = std::any_cast<unscaled_t>(unscaled_input_p[i]);
+      _unscaled_input[i] = std::any_cast<unscaled_t>(unscaled_input_p[i]);
     }
 
     // scale inputs
@@ -33,15 +33,11 @@ public:
   }
   
   virtual void read_result(std::any result) {
-    result_t *result_p = std::any_cast<result_t*>(result);
+    std::pair<result_t*,resultsq_t> result_p = std::any_cast<std::pair<result_t*,resultsq_t>>(result);
     for (int i = 0; i < N_LAYER_6; i++) {
-      result_p[i] = _result[i];
-    }    
-  }
-  
-  virtual void read_loss(std::any loss) {
-    resultsq_t *loss_p = std::any_cast<resultsq_t*>(loss);
-    loss_p[0] = _loss;
+      result_p.first[i] = _result[i];
+    }
+    result_p.second = _loss;
   }
   
   // scaleNNInputs function from
