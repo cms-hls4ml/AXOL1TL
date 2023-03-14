@@ -2,6 +2,7 @@
 #include "emulator.h"
 #include "NN/nnet_utils/nnet_common.h"
 #include <any>
+#include <array>
 #include "ap_fixed.h"
 #include "ap_int.h"
 #include "scales.h"
@@ -33,7 +34,10 @@ public:
   }
   
   virtual void read_result(std::any result) {
-    std::pair<result_t*,resultsq_t> result_p = std::any_cast<std::pair<result_t*,resultsq_t>>(result);
+    // return results as an std::pair
+    // first = reconstructed output
+    // second = loss
+    std::pair<std::array<result_t, N_LAYER_6>, resultsq_t> result_p = std::any_cast<std::pair<std::array<result_t, N_LAYER_6>, resultsq_t>>(result);
     for (int i = 0; i < N_LAYER_6; i++) {
       result_p.first[i] = _result[i];
     }
