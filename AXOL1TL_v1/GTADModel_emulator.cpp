@@ -3,6 +3,8 @@
 #include "NN/nnet_utils/nnet_common.h"
 #include <any>
 #include "ap_fixed.h"
+#include "ap_int.h"
+#include "scales.h"
 
 //type notes
 //AD_NN_OUT_SQ_T = resultsq_t = typedef ap_ufixed<18,14> resultsq_t;
