@@ -1,16 +1,1 @@
-This is a prototype of a universal hls4ml C++ emulator. It works by relying on dynamic library loading, via dlopen()/dlclose() and loading symbols with dlsym(). These functions are part of POSIX standard and will exist for as long as Linux exists. The advantage of this approach is that it standardizes the emulator logic (it is less than 10 lines and same for every model, see main.cpp) and doesn't require extensive modification of generated HLS and it's inclusion into CMSSW. The versioning of the models is also simplified, as one can simply name the new library differently. Note that Linux doesn't provide any guarantee of dynamic unloading actually happening, so different versions of models must have different names (like "V2" or whatever).
-
-To run the example, first compile the loadable library with build_emu_lib.sh, then run make to create an example emulator. Note how the emulator doesn't depend on the library.
-
-The main idea is to create an interface to the hls4ml models and have hls4ml generate concrete implementations for any given model. Since the input/output type is fixed precision AP type, which itself is a templated type, the only way the interface can be general is to make it work with std::any types (part of C++17). The concrete implementation then casts this to a proper type with std::any_cast<>(). The issue here is that this will cause runtime errors if a mismatch happens rather than a compile error. To somewhat alleviate this, we can consider also exporting input/output type and size information along with the HLS code from hls4ml.
-
-The loading of shared library requires the model to be precompiled to a .so file. With some care this is very future-proof, since libraries compiled in CC7 are guaranteed to run even on the hypothetical CC9 (currently CS9), and the same is true for newer CS8. In the very near future, we plan to create an interchange format for hls4ml that will consist of the model architecture (loadable in python), the source code (compilable with any compiler) and the compiled library, all packed in a single file. So if the library fails to load in the future, the source is available and should be easy to compile, and even if that fails the original architecture that generated the source is available so newer versions of hls4ml will be able to produce new code. This should have us covered for decades.
-
-The changes required to the hls4ml are minimal. In this example the only change was to prevent loading of files from txt files, which CMSSW doesn't like, or so I was told. The two new files, <project-name>_emulator.cpp and the build script, are trivial to add to the hls4ml's writer.
-
-In CMSSW only the emulator header file is required. The models will come as binary blobs, hopefully in the aforementioned format, and optionally with the <model_name>_defs.h header. How the models will be loaded, and can the 10 lines be placed in some central location I leave to whoever integrates this into CMSSW.
-
-Can we now please move away from the "let's dump the HLS source into CMSSW and make a million changes to hls4ml and the generated source to support this abomination" approach that Phil grandfathered, as this is a bad approach which hopefully this prototype demonstrates?
-
-Sincerely,
-Vladimir
+ANOMALY DETECTION FOR GLOBAL TRIGGER 
