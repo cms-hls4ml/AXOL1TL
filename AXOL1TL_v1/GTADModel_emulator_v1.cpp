@@ -3,6 +3,7 @@
 #include "NN/nnet_utils/nnet_common.h"
 #include <any>
 #include <array>
+#include <utility>
 #include "ap_fixed.h"
 #include "ap_int.h"
 #include "scales.h"
