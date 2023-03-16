@@ -22,18 +22,14 @@
 #include "parameters.h"
 
 void GTADModel_v1(
-    input_t _input[N_INPUT_1_1],
-    result_t _result[N_LAYER_6]
+    input_t input_1[N_INPUT_1_1],
+    result_t layer7_out[N_LAYER_6]
 ) {
 
     //hls-fpga-machine-learning insert IO
-    // #pragma HLS ARRAY_RESHAPE variable=fc1_input complete dim=0
-    // #pragma HLS ARRAY_PARTITION variable=layer16_out complete dim=0
-    // #pragma HLS INTERFACE ap_vld port=fc1_input,layer16_out 
-    // #pragma HLS PIPELINE 
-    #pragma HLS ARRAY_RESHAPE variable=_input complete dim=0
-    #pragma HLS ARRAY_PARTITION variable=_result complete dim=0
-    #pragma HLS INTERFACE ap_vld port=_input,_result
+    #pragma HLS ARRAY_RESHAPE variable=input_1 complete dim=0
+    #pragma HLS ARRAY_PARTITION variable=layer7_out complete dim=0
+    #pragma HLS INTERFACE ap_vld port=input_1,layer7_out
     #pragma HLS PIPELINE
   
 #ifdef LOAD_WEIGHTS_FROM_TXT
@@ -58,7 +54,7 @@ void GTADModel_v1(
  
     layer2_t layer2_out[N_LAYER_2];
     #pragma HLS ARRAY_PARTITION variable=layer2_out complete dim=0
-    nnet::dense<input_t, layer2_t, config2>(_input, layer2_out, w2, b2); // q_dense
+    nnet::dense<input_t, layer2_t, config2>(input_1, layer2_out, w2, b2); // q_dense
 
     layer3_t layer3_out[N_LAYER_2];
     #pragma HLS ARRAY_PARTITION variable=layer3_out complete dim=0
@@ -76,6 +72,6 @@ void GTADModel_v1(
     #pragma HLS ARRAY_PARTITION variable=layer6_out complete dim=0
     nnet::dense<layer5_t, layer6_t, config6>(layer5_out, layer6_out, w6, b6); // mu
 
-    nnet::linear<layer6_t, result_t, linear_config7>(layer6_out, _result); // mu_quantized_bits
+    nnet::linear<layer6_t, result_t, linear_config7>(layer6_out, layer7_out); // mu_quantized_bits
 
 }

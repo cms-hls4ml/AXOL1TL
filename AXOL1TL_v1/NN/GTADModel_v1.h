@@ -17,8 +17,8 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#ifndef MYPROJECT_H_
-#define MYPROJECT_H_
+#ifndef GTADMODEL_V1_H_
+#define GTADMODEL_V1_H_
 
 #include "ap_int.h"
 #include "ap_fixed.h"
@@ -28,8 +28,8 @@
 
 // Prototype of top level function for C-synthesis
 void GTADModel_v1(
-	       input_t _input[N_INPUT_1_1],
-	       result_t _result[N_LAYER_6]
+	       input_t input_1[N_INPUT_1_1],
+	       result_t layer7_out[N_LAYER_6]
 	       );
 
 #endif
