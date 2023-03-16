@@ -64,11 +64,11 @@ public:
     // return results as an std::pair
     // first = reconstructed output
     // second = loss
-    std::pair<std::array<result_t, N_LAYER_6>, resultsq_t> result_p = std::any_cast<std::pair<std::array<result_t, N_LAYER_6>, resultsq_t>>(result);
+    std::pair<std::array<result_t, N_LAYER_6>, resultsq_t> *result_p = std::any_cast<std::pair<std::array<result_t, N_LAYER_6>, resultsq_t>*>(result);
     for (int i = 0; i < N_LAYER_6; i++) {
-      result_p.first[i] = _result[i];
+      result_p->first[i] = _result[i];
     }
-    result_p.second = _loss;
+    result_p->second = _loss;
   }
   
 };
