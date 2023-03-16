@@ -25,4 +25,4 @@ install: all
 	$(MAKE) -C $(@D) INCLUDES="$(INCLUDES)" LD_FLAGS="$(LD_FLAGS)" CXXFLAGS="$(CXXFLAGS)"
 
 clean:
-	rm GTADModel_v1*.so
+	rm GTADModel_v1*.so $(ALL_VERSIONS)
