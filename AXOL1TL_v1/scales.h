@@ -4,12 +4,14 @@
 #include "NN/GTADModel_v1.h"
 
 //N_INPUT_1_1=AD_NNNINPUTS
-static const int32_t ad_shift[N_INPUT_1_1] = {
+typedef ap_fixed<5,5> ad_shift_t;
+typedef ap_fixed<10,9> ad_offset_t;
+
+static const ad_shift_t ad_shift[N_INPUT_1_1] = {
   4, 0, 5, 2, 5, 6, 1, 5, 6, 0, 5, 6, 0, 5, 5, 0, 6, 7, -1, 0, 0, -1,
   0, 0, -1, 0, 0, 4, 5, 6, 3, 5, 6, 3, 5, 6, 3, 4, 6, 3, 4, 5, 2, 4,
   5, 2, 3, 5, 1, 0, 4, -1, 0, 0, -1, 0, 0};
 
-typedef ap_fixed<8, 7> ad_offset_t;
 static const ad_offset_t ad_offsets[N_INPUT_1_1] = {
   21., 0., 36., 5., 0., 34., 3., 0., 33.5, 2., 0.5,
   32., 1.5, -3., 31., 2., 0.5, 80., 0., 0., 0., 0.,
