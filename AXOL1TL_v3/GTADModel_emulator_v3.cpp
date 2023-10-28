@@ -1,4 +1,4 @@
-#include "NN/GTADModel_v2.h"
+#include "NN/GTADModel_v3.h"
 #include "emulator.h"
 #include "NN/nnet_utils/nnet_common.h"
 #include <any>
@@ -8,7 +8,7 @@
 #include "ap_int.h"
 #include "scales.h"
 
-class GTADModel_emulator_v2 : public hls4mlEmulator::Model {
+class GTADModel_emulator_v3 : public hls4mlEmulator::Model {
 
 private:
     unscaled_t _unscaled_input[N_INPUT_1_1];
@@ -19,7 +19,7 @@ private:
     // scaleNNInputs function from
   // https://github.com/cms-l1-globaltrigger/mp7_ugt_legacy/blob/anomaly_detection_trigger/firmware/hls/anomaly_detection/anomaly_detection.cpp#L28
   //now in https://gitlab.cern.ch/ssummers/run3_ugt_ml/-/blob/master/ugt_hls/src/anomaly_detection/anomaly_detection.cpp
-  //unchanged in v2
+  //unchanged in v3
   virtual void _scaleNNInputs(unscaled_t unscaled[N_INPUT_1_1], input_t scaled[N_INPUT_1_1])
   {
     for (int i = 0; i < N_INPUT_1_1; i++)
@@ -33,7 +33,7 @@ private:
   // computeLoss function from
   // https://github.com/cms-l1-globaltrigger/mp7_ugt_legacy/blob/anomaly_detection_trigger/firmware/hls/anomaly_detection/anomaly_detection.cpp#L7
   //now in https://gitlab.cern.ch/ssummers/run3_ugt_ml/-/blob/master/ugt_hls/src/anomaly_detection/anomaly_detection.cpp#L7
-  //unchanged in v2
+  //unchanged in v3
   virtual resultsq_t _computeLoss(result_t result_p[N_LAYER_6]) {
       resultsq_t squares[N_LAYER_6];
       resultsq_t square_sum;
@@ -60,7 +60,7 @@ public:
   }
 
   virtual void predict() {
-    GTADModel_v2(_scaled_input, _result);
+    GTADModel_v3(_scaled_input, _result);
     _loss = _computeLoss(_result);
   }
   
@@ -78,7 +78,7 @@ public:
 };
 
 extern "C" hls4mlEmulator::Model* create_model() {
-    return new GTADModel_emulator_v2;
+    return new GTADModel_emulator_v3;
 }
 
 extern "C" void destroy_model(hls4mlEmulator::Model* m) {

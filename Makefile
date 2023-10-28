@@ -7,7 +7,7 @@ HLS_ROOT := ../../hls
 HLS4ML_INCLUDE := $(EMULATOR_EXTRAS)/include/hls4ml
 INCLUDES := -I$(HLS4ML_INCLUDE) -I$(AP_TYPES) -I$(HLS_ROOT)/include
 LD_FLAGS := -L$(EMULATOR_EXTRAS)/lib64 -lemulator_interface
-ALL_VERSIONS:=AXOL1TL_v1/GTADModel_v1.so AXOL1TL_v2/GTADModel_v2.so
+ALL_VERSIONS:=AXOL1TL_v1/GTADModel_v1.so AXOL1TL_v3/GTADModel_v3.so
 
 .DEFAULT_GOAL := all
 .PHONY: all clean install

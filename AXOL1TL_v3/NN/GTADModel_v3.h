@@ -19,8 +19,8 @@
 
 //from https://gitlab.cern.ch/ssummers/run3_ugt_ml/-/blob/master/ugt_hls/src/anomaly_detection/NN/VAE_HLS.h
 
-#ifndef GTADMODEL_V2_H_
-#define GTADMODEL_V2_H_
+#ifndef GTADMODEL_V3_H_
+#define GTADMODEL_V3_H_
 
 #include "ap_int.h"
 #include "ap_fixed.h"
@@ -28,9 +28,8 @@
 
 #include "defines.h"
 
-// Prototype of top level function for C-synthesis
-//from https://gitlab.cern.ch/ssummers/run3_ugt_ml/-/blob/axol1tl1_v2/ugt_hls/src/anomaly_detection/Axol1tl_v2.h#L37
-void GTADModel_v2(
+//from https://gitlab.cern.ch/ssummers/run3_ugt_ml/-/blob/axol1tl_v3/ugt_hls/src/anomaly_detection/Axol1tl_v3.h
+void GTADModel_v3(
 	       input_t input_3[N_INPUT_1_1],
 	       result_t layer7_out[N_LAYER_6]
 	       );

@@ -18,38 +18,41 @@
 //
 #include <iostream>
 
-#include "GTADModel_v2.h"
+#include "GTADModel_v3.h"
 #include "parameters.h"
+#include "defines.h"
 
-//from https://gitlab.cern.ch/ssummers/run3_ugt_ml/-/blob/master/ugt_hls/src/anomaly_detection/NN/VAE_HLS.cpp
-//now https://gitlab.cern.ch/ssummers/run3_ugt_ml/-/blob/axol1tl1_v2/ugt_hls/src/anomaly_detection/Axol1tl_v2.h#L37
-//and also
-void GTADModel_v2(
+//from https://gitlab.cern.ch/ssummers/run3_ugt_ml/-/blob/axol1tl_v3/ugt_hls/src/anomaly_detection/Axol1tl_v3.h
+
+void GTADModel_v3(
     input_t input_3[N_INPUT_1_1],
     result_t layer7_out[N_LAYER_6]
 ) {
 
-    //hls-fpga-machine-learning insert IO
-    #pragma HLS ARRAY_RESHAPE variable=input_1 complete dim=0
-    #pragma HLS ARRAY_PARTITION variable=layer7_out complete dim=0
-    #pragma HLS INTERFACE ap_vld port=input_1,layer7_out
-    #pragma HLS PIPELINE
+//hls-fpga-machine-learning insert IO
+#pragma HLS ARRAY_RESHAPE variable=input_3 complete dim=0
+#pragma HLS ARRAY_PARTITION variable=layer7_out complete dim=0
+#pragma HLS PIPELINE 
+
+
+  //load weights from weights.cpp instead
   
-#ifdef LOAD_WEIGHTS_FROM_TXT
-    static bool loaded_weights = false;
-    if (!loaded_weights) {
-        //hls-fpga-machine-learning insert load weights
-        nnet::load_weights_from_txt<weight2_t, 1824>(w2, "w2.txt");
-        nnet::load_weights_from_txt<bias2_t, 32>(b2, "b2.txt");
-        nnet::load_weights_from_txt<weight4_t, 512>(w4, "w4.txt");
-        nnet::load_weights_from_txt<bias4_t, 16>(b4, "b4.txt");
-        nnet::load_weights_from_txt<weight6_t, 128>(w6, "w6.txt");
-        nnet::load_weights_from_txt<bias6_t, 8>(b6, "b6.txt");
-        nnet::load_weights_from_txt<ad_shift_t, 57>(ad_shift, "ad_shift.txt");
-        nnet::load_weights_from_txt<ad_offset_t, 57>(ad_offsets, "ad_offsets.txt");
-        loaded_weights = true;
-    }
-#endif
+  //txt files out of date 
+// #ifdef LOAD_WEIGHTS_FROM_TXT
+//     static bool loaded_weights = false;
+//     if (!loaded_weights) {
+//         //hls-fpga-machine-learning insert load weights
+//         nnet::load_weights_from_txt<weight2_t, 1824>(w2, "w2.txt");
+//         nnet::load_weights_from_txt<bias2_t, 32>(b2, "b2.txt");
+//         nnet::load_weights_from_txt<weight4_t, 512>(w4, "w4.txt");
+//         nnet::load_weights_from_txt<bias4_t, 16>(b4, "b4.txt");
+//         nnet::load_weights_from_txt<weight6_t, 128>(w6, "w6.txt");
+//         nnet::load_weights_from_txt<bias6_t, 8>(b6, "b6.txt");
+//         nnet::load_weights_from_txt<ad_shift_t, 57>(ad_shift, "ad_shift.txt");
+//         nnet::load_weights_from_txt<ad_offset_t, 57>(ad_offsets, "ad_offsets.txt");
+//         loaded_weights = true;
+//     }
+// #endif
 
     // ****************************************
     // NETWORK INSTANTIATION
@@ -78,5 +81,6 @@ void GTADModel_v2(
     nnet::dense<layer5_t, layer6_t, config6>(layer5_out, layer6_out, w6, b6); // mu
 
     nnet::linear<layer6_t, result_t, linear_config7>(layer6_out, layer7_out); // mu_quantized_bits
+
 
 }
