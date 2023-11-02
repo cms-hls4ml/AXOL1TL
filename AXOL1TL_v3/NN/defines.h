@@ -1,4 +1,4 @@
-#ifndef DEFINES_H_
+#ifndef DEFINES_H_A
 #define DEFINES_H_
 
 #include "ap_int.h"
@@ -14,17 +14,6 @@
 #define N_LAYER_2 32
 #define N_LAYER_4 16
 #define N_LAYER_6 8 //changed v3
-
-
-//define weights here instead of in weight/ files
-extern const weight2_t w2[1824];
-extern const bias2_t b2[32];
-extern const weight4_t w4[512];
-extern const bias4_t b4[16];
-extern const weight6_t w6[128];
-extern const bias6_t b6[8];
-extern const ad_shift_t ad_shift[57];
-extern const ad_offset_t ad_offsets[57];
 
 //hls-fpga-machine-learning insert layer-precision
 //copied from https://gitlab.cern.ch/ssummers/run3_ugt_ml/-/blob/axol1tl_v3/ugt_hls/src/anomaly_detection/Axol1tl_v3.h
@@ -57,5 +46,16 @@ typedef ap_fixed<18,8> mu_quantized_bits_table_t;
 //from https://gitlab.cern.ch/ssummers/run3_ugt_ml/-/blob/axol1tl_v3/ugt_hls/src/anomaly_detection/Axol1tl_v3.h
 typedef ap_ufixed<18,14> resultsq_t; //from AD_NN_OUT_SQ_T
 typedef ap_fixed<18,13> unscaled_t; //from AD_NNNOUTPUTS
+
+//define weights here instead of in weight/ files
+//filled in weights.cpp
+extern const weight2_t w2[1824];
+extern const bias2_t b2[32];
+extern const weight4_t w4[512];
+extern const bias4_t b4[16];
+extern const weight6_t w6[128];
+extern const bias6_t b6[8];
+extern const ad_shift_t ad_shift[57];
+extern const ad_offset_t ad_offsets[57];
 
 #endif
