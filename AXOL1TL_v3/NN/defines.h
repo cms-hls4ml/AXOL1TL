@@ -1,4 +1,4 @@
-#ifndef DEFINES_H_A
+#ifndef DEFINES_H_
 #define DEFINES_H_
 
 #include "ap_int.h"
