@@ -49,13 +49,13 @@ typedef ap_fixed<18,13> unscaled_t; //from AD_NNNOUTPUTS
 
 //define weights here instead of in weight/ files
 //filled in weights.cpp
-extern const weight2_t w2[1824];
-extern const bias2_t b2[32];
-extern const weight4_t w4[512];
-extern const bias4_t b4[16];
-extern const weight6_t w6[128];
-extern const bias6_t b6[8];
-extern const ad_shift_t ad_shift[57];
-extern const ad_offset_t ad_offsets[57];
+extern weight2_t w2[1824];
+extern bias2_t b2[32];
+extern weight4_t w4[512];
+extern bias4_t b4[16];
+extern weight6_t w6[128];
+extern bias6_t b6[8];
+extern ad_shift_t ad_shift[57];
+extern ad_offset_t ad_offsets[57];
 
 #endif
