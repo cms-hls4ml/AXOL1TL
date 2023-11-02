@@ -13,7 +13,7 @@
 #include "nnet_utils/nnet_dense.h"
  
 //hls-fpga-machine-learning insert weights
-#include "weights.h"
+#include "defines.h"
 //weights/.h files outdated
 // #include "weights/w2.h"
 // #include "weights/b2.h"
