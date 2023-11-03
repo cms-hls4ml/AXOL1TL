@@ -6,6 +6,7 @@
 #include <utility>
 #include "ap_fixed.h"
 #include "ap_int.h"
+#include "scales.h"
 
 class GTADModel_emulator_v3 : public hls4mlEmulator::Model {
 

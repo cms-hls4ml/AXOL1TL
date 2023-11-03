@@ -17,8 +17,6 @@
 
 //hls-fpga-machine-learning insert layer-precision
 //copied from https://gitlab.cern.ch/ssummers/run3_ugt_ml/-/blob/axol1tl_v3/ugt_hls/src/anomaly_detection/Axol1tl_v3.h
-typedef ap_fixed<4,4> ad_shift_t;
-typedef ap_fixed<10,9> ad_offset_t;
 typedef ap_fixed<8,6,AP_RND_CONV,AP_SAT> input_t;
 typedef ap_fixed<21,16> q_dense_accum_t;
 typedef ap_fixed<21,16> layer2_t;
@@ -55,7 +53,5 @@ extern weight4_t w4[512];
 extern bias4_t b4[16];
 extern weight6_t w6[128];
 extern bias6_t b6[8];
-extern ad_shift_t ad_shift[57];
-extern ad_offset_t ad_offsets[57];
 
 #endif
