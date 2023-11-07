@@ -14,15 +14,7 @@
  
 //hls-fpga-machine-learning insert weights
 #include "defines.h"
-//weights/.h files outdated
-// #include "weights/w2.h"
-// #include "weights/b2.h"
-// #include "weights/w4.h"
-// #include "weights/b4.h"
-// #include "weights/w6.h"
-// #include "weights/b6.h"
-// #include "weights/ad_shift.h"
-// #include "weights/ad_offsets.h"
+#include "weights.h"
 
 //from https://gitlab.cern.ch/ssummers/run3_ugt_ml/-/blob/axol1tl_v3/ugt_hls/src/anomaly_detection/Axol1tl_v3.h
 
