@@ -8,6 +8,8 @@
 #include "ap_int.h"
 #include "scales.h"
 
+using namespace hls4ml_axol1tl_v3;
+
 class GTADModel_emulator_v3 : public hls4mlEmulator::Model {
 
 private:
@@ -74,7 +76,6 @@ public:
     }
     result_p->second = _loss;
   }
-  
 };
 
 extern "C" hls4mlEmulator::Model* create_model() {
@@ -84,4 +85,3 @@ extern "C" hls4mlEmulator::Model* create_model() {
 extern "C" void destroy_model(hls4mlEmulator::Model* m) {
     delete m;
 }
-

@@ -24,6 +24,8 @@
 
 //from https://gitlab.cern.ch/ssummers/run3_ugt_ml/-/blob/axol1tl_v3/ugt_hls/src/anomaly_detection/Axol1tl_v3.h
 
+using namespace hls4ml_axol1tl_v3;
+
 void GTADModel_v3(
     input_t input_3[N_INPUT_1_1],
     result_t layer7_out[N_LAYER_6]

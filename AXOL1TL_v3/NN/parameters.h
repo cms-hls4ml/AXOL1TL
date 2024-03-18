@@ -16,6 +16,7 @@
 #include "defines.h"
 #include "weights.h"
 
+namespace hls4ml_axol1tl_v3 {
 //from https://gitlab.cern.ch/ssummers/run3_ugt_ml/-/blob/axol1tl_v3/ugt_hls/src/anomaly_detection/Axol1tl_v3.h
 
 //hls-fpga-machine-learning insert layer-config
@@ -106,5 +107,6 @@ struct linear_config7 : nnet::activ_config {
     typedef mu_quantized_bits_table_t table_t;
 };
  
+} // namespace hls4ml_axol1tl_v3
 
 #endif

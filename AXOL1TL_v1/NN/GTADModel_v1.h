@@ -28,8 +28,8 @@
 
 // Prototype of top level function for C-synthesis
 void GTADModel_v1(
-	       input_t input_1[N_INPUT_1_1],
-	       result_t layer7_out[N_LAYER_6]
+	       hls4ml_axol1tl_v1::input_t input_1[hls4ml_axol1tl_v1::N_INPUT_1_1],
+	       hls4ml_axol1tl_v1::result_t layer7_out[hls4ml_axol1tl_v1::N_LAYER_6]
 	       );
 
 #endif

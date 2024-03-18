@@ -8,6 +8,8 @@
 #include "ap_int.h"
 #include "scales.h"
 
+using namespace hls4ml_axol1tl_v1;
+
 class GTADModel_emulator_v1 : public hls4mlEmulator::Model {
 
 private:

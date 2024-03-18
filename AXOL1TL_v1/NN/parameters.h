@@ -17,6 +17,7 @@
 #include "weights/w6.h"
 #include "weights/b6.h"
 
+namespace hls4ml_axol1tl_v1{
 //hls-fpga-machine-learning insert layer-config
 // q_dense
 struct config2 : nnet::dense_config {
@@ -98,6 +99,6 @@ struct linear_config7 : nnet::activ_config {
     static const unsigned reuse_factor = 1;
     typedef mu_quantized_bits_table_t table_t;
 };
-
+} // namespace hls4ml_axol1tl_v1
 
 #endif
