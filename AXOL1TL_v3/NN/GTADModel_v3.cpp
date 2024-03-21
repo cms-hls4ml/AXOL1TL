@@ -24,7 +24,7 @@
 
 //from https://gitlab.cern.ch/ssummers/run3_ugt_ml/-/blob/axol1tl_v3/ugt_hls/src/anomaly_detection/Axol1tl_v3.h
 
-using namespace hls4ml_axol1tl_v3;
+namespace hls4ml_axol1tl_v3 {
 
 void GTADModel_v3(
     input_t input_3[N_INPUT_1_1],
@@ -84,5 +84,6 @@ void GTADModel_v3(
 
     nnet::linear<layer6_t, result_t, linear_config7>(layer6_out, layer7_out); // mu_quantized_bits
 
+} // namespace hls4ml_axol1tl_v3
 
 }
