@@ -26,8 +26,8 @@ private:
   {
     for (int i = 0; i < N_INPUT_1_1; i++)
       {
-	unscaled_t tmp0 = unscaled[i] - ad_offsets[i];
-	input_t tmp1 = tmp0 >> ad_shift[i];
+	unscaled_t tmp0 = unscaled[i] - hls4ml_axol1tl_v3::ad_offsets[i];
+	input_t tmp1 = tmp0 >> hls4ml_axol1tl_v3::ad_shift[i];
 	scaled[i] = tmp1;
       }
   }
