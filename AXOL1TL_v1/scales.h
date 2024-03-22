@@ -4,6 +4,7 @@
 #include "NN/GTADModel_v1.h"
 
 //N_INPUT_1_1=AD_NNNINPUTS
+namespace hls4ml_axol1tl_v1{
 typedef ap_fixed<5,5> ad_shift_t;
 typedef ap_fixed<10,9> ad_offset_t;
 
@@ -19,5 +20,5 @@ static const ad_offset_t ad_offsets[N_INPUT_1_1] = {
   12., 0.5, 34., 10., 0.5, 33., 8.5, 0., 32., 7., 0.5,
   29., 5., 0.5, 24., 3., 0., 15., 0., 0., 0., 0.,
   0., 0.};
-
+}
 #endif
