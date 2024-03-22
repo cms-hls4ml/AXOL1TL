@@ -6,10 +6,11 @@
 #ifndef B6_H_
 #define B6_H_
 
+namespace hls4ml_axol1tl_v1{
 #ifdef LOAD_WEIGHTS_FROM_TXT
 bias6_t b6[13];
 #else
 bias6_t b6[13] = {0.250, 1.625, -0.125, 0.000, 0.250, 0.375, 0.000, 0.000, 0.500, 2.125, 0.125, -0.750, 0.000};
 #endif
-
+}
 #endif

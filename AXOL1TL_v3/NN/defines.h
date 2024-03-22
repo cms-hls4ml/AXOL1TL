@@ -7,13 +7,13 @@
 #include <cstddef>
 #include <cstdio>
 
-
+namespace hls4ml_axol1tl_v3 {
 // hls-fpga-machine-learning insert numbers
 //copied from https://gitlab.cern.ch/ssummers/run3_ugt_ml/-/blob/axol1tl_v3/ugt_hls/src/anomaly_detection/Axol1tl_v3.h
-#define N_INPUT_1_1 57
-#define N_LAYER_2 32
-#define N_LAYER_4 16
-#define N_LAYER_6 8 //changed v3
+static const int N_INPUT_1_1 = 57;
+static const int N_LAYER_2 = 32;
+static const int N_LAYER_4 = 16;
+static const int N_LAYER_6 = 8; //changed v3
 
 //hls-fpga-machine-learning insert layer-precision
 //copied from https://gitlab.cern.ch/ssummers/run3_ugt_ml/-/blob/axol1tl_v3/ugt_hls/src/anomaly_detection/Axol1tl_v3.h
@@ -54,4 +54,5 @@ extern bias4_t b4[16];
 extern weight6_t w6[128];
 extern bias6_t b6[8];
 
+} // namespace hls4ml_axol1tl_v3
 #endif

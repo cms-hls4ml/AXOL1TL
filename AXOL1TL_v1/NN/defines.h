@@ -7,11 +7,12 @@
 #include <cstddef>
 #include <cstdio>
 
+namespace hls4ml_axol1tl_v1{
 // hls-fpga-machine-learning insert numbers
-#define N_INPUT_1_1 57
-#define N_LAYER_2 32
-#define N_LAYER_4 16
-#define N_LAYER_6 13
+static const int N_INPUT_1_1 = 57;
+static const int N_LAYER_2 = 32;
+static const int N_LAYER_4 = 16;
+static const int N_LAYER_6 = 13;
 
 //hls-fpga-machine-learning insert layer-precision
 typedef ap_fixed<11,6> input_1_accum_t;
@@ -40,5 +41,5 @@ typedef ap_fixed<10,7> result_t;
 typedef ap_fixed<18,8> mu_quantized_bits_table_t;
 typedef ap_ufixed<18,14> resultsq_t;
 typedef ap_fixed<18,13> unscaled_t;
-
+}
 #endif

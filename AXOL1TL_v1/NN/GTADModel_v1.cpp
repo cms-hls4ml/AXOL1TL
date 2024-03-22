@@ -21,6 +21,8 @@
 #include "GTADModel_v1.h"
 #include "parameters.h"
 
+namespace hls4ml_axol1tl_v1 {
+
 void GTADModel_v1(
     input_t input_1[N_INPUT_1_1],
     result_t layer7_out[N_LAYER_6]
@@ -73,5 +75,7 @@ void GTADModel_v1(
     nnet::dense<layer5_t, layer6_t, config6>(layer5_out, layer6_out, w6, b6); // mu
 
     nnet::linear<layer6_t, result_t, linear_config7>(layer6_out, layer7_out); // mu_quantized_bits
+
+} // hls4ml_axol1tl_v1
 
 }
