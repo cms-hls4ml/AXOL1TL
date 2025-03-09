@@ -19,8 +19,8 @@
 
 //from https://gitlab.cern.ch/ssummers/run3_ugt_ml/-/blob/master/ugt_hls/src/anomaly_detection/NN/VAE_HLS.h
 
-#ifndef GTADMODEL_V4_H_
-#define GTADMODEL_V4_H_
+#ifndef GTADMODEL_V5_H_
+#define GTADMODEL_V5_H_
 
 #include "ap_int.h"
 #include "ap_fixed.h"
@@ -28,14 +28,14 @@
 
 #include "defines.h"
 
-namespace hls4ml_axol1tl_v4 {
+namespace hls4ml_axol1tl_v5 {
 
-//from https://gitlab.cern.ch/ssummers/run3_ugt_ml/-/blob/axol1tl_v4/ugt_hls/src/anomaly_detection/Axol1tl_v4.h
-void GTADModel_v4(
-	       hls4ml_axol1tl_v4::input_t input_3[hls4ml_axol1tl_v4::N_INPUT_1_1],
-	       hls4ml_axol1tl_v4::result_t layer7_out[hls4ml_axol1tl_v4::N_LAYER_6]
+//from https://gitlab.cern.ch/ssummers/run3_ugt_ml/-/blob/axol1tl_v5/ugt_hls/src/anomaly_detection/Axol1tl_v5.h
+void GTADModel_v5(
+	       hls4ml_axol1tl_v5::input_t input_1[hls4ml_axol1tl_v5::N_INPUT_1_1],
+	       hls4ml_axol1tl_v5::result_t layer19_out[hls4ml_axol1tl_v5::OUT_DOT_19]
 	       );
 
-} // namespace hls4ml_axol1tl_v4
+} // namespace hls4ml_axol1tl_v5
 
 #endif

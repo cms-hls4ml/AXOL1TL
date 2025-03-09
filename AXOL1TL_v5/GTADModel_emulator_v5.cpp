@@ -15,7 +15,7 @@ class GTADModel_emulator_v5 : public hls4mlEmulator::Model {
 private:
     unscaled_t _unscaled_input[N_INPUT_1_1];
     input_t _scaled_input[N_INPUT_1_1];
-    result_t _result[N_LAYER_6];
+    result_t _result[OUT_DOT_19];
     resultsq_t _loss;
 
     // scaleNNInputs function from
@@ -36,15 +36,15 @@ private:
   // https://github.com/cms-l1-globaltrigger/mp7_ugt_legacy/blob/anomaly_detection_trigger/firmware/hls/anomaly_detection/anomaly_detection.cpp#L7
   //now in https://gitlab.cern.ch/ssummers/run3_ugt_ml/-/blob/master/ugt_hls/src/anomaly_detection/anomaly_detection.cpp#L7
   //unchanged in v5
-  virtual resultsq_t _computeLoss(result_t result_p[N_LAYER_6]) {
-      resultsq_t squares[N_LAYER_6];
+  virtual resultsq_t _computeLoss(result_t result_p[OUT_DOT_19]) {
+      resultsq_t squares[OUT_DOT_19];
       resultsq_t square_sum;
 
-      for (int i = 0; i < N_LAYER_6; i++) {
+      for (int i = 0; i < OUT_DOT_19; i++) {
 	      squares[i]  = result_p[i] * result_p[i];
       }
       nnet::Op_add<resultsq_t> op;
-      square_sum = nnet::reduce<resultsq_t, N_LAYER_6, nnet::Op_add<resultsq_t>>(squares, op);
+      square_sum = nnet::reduce<resultsq_t, OUT_DOT_19, nnet::Op_add<resultsq_t>>(squares, op);
       return square_sum;
   }
 
@@ -70,8 +70,8 @@ public:
     // return results as an std::pair
     // first = reconstructed output
     // second = loss
-    std::pair<std::array<result_t, N_LAYER_6>, resultsq_t> *result_p = std::any_cast<std::pair<std::array<result_t, N_LAYER_6>, resultsq_t>*>(result);
-    for (int i = 0; i < N_LAYER_6; i++) {
+    std::pair<std::array<result_t, OUT_DOT_19>, resultsq_t> *result_p = std::any_cast<std::pair<std::array<result_t, OUT_DOT_19>, resultsq_t>*>(result);
+    for (int i = 0; i < OUT_DOT_19; i++) {
       result_p->first[i] = _result[i];
     }
     result_p->second = _loss;
