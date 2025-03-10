@@ -58,10 +58,6 @@ public:
   virtual void predict() {
     GTADModel_v5(_scaled_input, _result);
     _loss = _computeLoss(_result);
-    std::cout<< "result: "<< _result << std::endl;
-    std::cout<< "result type: "<< typeid(_result).name() << std::endl;
-    std::cout<< "loss: "<< _loss << std::endl;
-    std::cout<< "loss type: "<< typeid(_loss).name() << std::endl;
   }
   
   virtual void read_result(std::any result) {
@@ -69,7 +65,7 @@ public:
     // first = reconstructed output
     // second = loss
     std::pair<result_t, resultsq_t> *result_p = std::any_cast<std::pair<result_t, resultsq_t>*>(result);
-    result_p->first[i] = _result[i]; //only 1 result this time
+    result_p->first[0] = _result[0]; //only 1 result this time
     result_p->second = _loss;
   }
 };
