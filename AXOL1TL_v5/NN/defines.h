@@ -85,22 +85,22 @@ typedef ap_fixed<18,14,AP_RND_CONV,AP_SAT> result_t;
 typedef result_t resultsq_t; //the same as result_t in v5
 typedef ap_fixed<18,13> unscaled_t; //from AD_NNNOUTPUTS
 
-static const weight2_t w2[1653];
-static const bias2_t b2[29];
-static const weight4_t w4[290];
-static const bias4_t b4[10];
-static const weight6_t w6[90];
-static const bias6_t b6[9];
-static const weight8_t w8[54];
-static const bias8_t b8[6];
-static const weight10_t w10[24];
-static const bias10_t b10[4];
-static const weight12_t w12[24];
-static const bias12_t b12[6];
-static const weight14_t w14[54];
-static const bias14_t b14[9];
-static const weight16_t w16[90];
-static const bias16_t b16[10];
+extern weight2_t w2[1653];
+extern bias2_t b2[29];
+extern weight4_t w4[290];
+extern bias4_t b4[10];
+extern weight6_t w6[90];
+extern bias6_t b6[9];
+extern weight8_t w8[54];
+extern bias8_t b8[6];
+extern weight10_t w10[24];
+extern bias10_t b10[4];
+extern weight12_t w12[24];
+extern bias12_t b12[6];
+extern weight14_t w14[54];
+extern bias14_t b14[9];
+extern weight16_t w16[90];
+extern bias16_t b16[10];
 
 } // namespace hls4ml_axol1tl_v5
 #endif
