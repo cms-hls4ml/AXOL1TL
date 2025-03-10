@@ -20,7 +20,7 @@ static const int N_LAYER_14=9;
 static const int N_LAYER_16=10;
 static const int OUT_DOT_19=1;
 
-typedef ap_fixed<14,6,AP_RND_CONV,AP_SAT> input_t;
+typedef ap_fixed<14,6,AP_RND_CONV,AP_SAT> input_t; //from AD_NN_IN_T
 typedef ap_fixed<27,16> q_dense_accum_t;
 typedef ap_fixed<27,16> layer2_t;
 typedef ap_fixed<6,3> weight2_t;
@@ -79,10 +79,10 @@ typedef ap_fixed<16,6> layer17_t;
 typedef ap_fixed<18,8> q_dense_8_linear_table_t;
 typedef ap_fixed<16,6> layer18_t;
 typedef ap_fixed<18,14,AP_RND_CONV,AP_SAT> dot_default_t;
-typedef ap_fixed<18,14,AP_RND_CONV,AP_SAT> result_t;
+typedef ap_fixed<18,14,AP_RND_CONV,AP_SAT> result_t; //from AD_NN_OUT_T;
 
 //for emulator
-typedef result_t resultsq_t; //the same as result_t in v5
+typedef ap_ufixed<18, 14> resultsq_t; //from AD_NN_OUT_SQ_T;
 typedef ap_fixed<18,13> unscaled_t; //from AD_NNNOUTPUTS
 
 extern weight2_t w2[1653];
