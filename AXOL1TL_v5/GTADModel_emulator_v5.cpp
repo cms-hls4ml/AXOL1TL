@@ -64,10 +64,12 @@ public:
     // return results as an std::pair
     // first = reconstructed output
     // second = loss
-    std::pair<std::array<result_t, OUT_DOT_19>, resultsq_t> *result_p = std::any_cast<std::pair<std::array<result_t, OUT_DOT_19>, resultsq_t>*>(result);
+    /* std::pair<std::array<result_t, OUT_DOT_19>, resultsq_t> *result_p = std::any_cast<std::pair<std::array<result_t, OUT_DOT_19>, resultsq_t>*>(result);
     for (int i = 0; i < OUT_DOT_19; i++) {
       result_p->first[i] = _result[i];
-    }
+     */
+    std::pair<result_t, resultsq_t> *result_p = std::any_cast<std::pair<result_t, resultsq_t>*>(result);
+    result_p->first = _result[0]; //only 1 result this time, 1d array
     result_p->second = _loss;
   }
 };
