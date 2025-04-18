@@ -35,7 +35,7 @@ private:
   // computeLoss function from
   // https://github.com/cms-l1-globaltrigger/mp7_ugt_legacy/blob/anomaly_detection_trigger/firmware/hls/anomaly_detection/anomaly_detection.cpp#L7
   // now in https://gitlab.cern.ch/ssummers/run3_ugt_ml/-/blob/master/ugt_hls/src/anomaly_detection/anomaly_detection.cpp#L7
-  virtual resultsq_t _computeLoss(result_t result_p[OUT_DOT_19]) {
+  virtual resultsq_t _computeLoss(result_t result_p[OUT_DOT_32]) {
     //now loss output directly, no mu^2 computed
     resultsq_t loss;
     loss = result_p[0];
