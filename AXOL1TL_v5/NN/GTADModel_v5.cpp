@@ -7,13 +7,13 @@
 namespace hls4ml_axol1tl_v5 {
 
 void GTADModel_v5(
-    input_t input_1[N_INPUT_1_1],
-    result_t layer19_out[OUT_DOT_19]
+    input_t input_2[N_INPUT_1_1],
+    result_t layer32_out[OUT_DOT_32]
 ) {
 
     // hls-fpga-machine-learning insert IO
-    #pragma HLS ARRAY_RESHAPE variable=input_1 complete dim=0
-    #pragma HLS ARRAY_PARTITION variable=layer19_out complete dim=0
+    #pragma HLS ARRAY_RESHAPE variable=input_2 complete dim=0
+    #pragma HLS ARRAY_PARTITION variable=layer32_out complete dim=0
     #pragma HLS PIPELINE 
 
     // ****************************************
@@ -22,75 +22,67 @@ void GTADModel_v5(
 
     // hls-fpga-machine-learning insert layers
 
-    layer2_t layer2_out[N_LAYER_2];
-    #pragma HLS ARRAY_PARTITION variable=layer2_out complete dim=0
-    nnet::dense<input_t, layer2_t, config2>(input_1, layer2_out, w2, b2); // q_dense
-
-    layer3_t layer3_out[N_LAYER_2];
+    q_dense_t layer3_out[N_LAYER_3];
     #pragma HLS ARRAY_PARTITION variable=layer3_out complete dim=0
-    nnet::relu<layer2_t, layer3_t, relu_config3>(layer2_out, layer3_out); // q_dense_quantized_relu
+    nnet::dense<input_t, q_dense_t, config3>(input_2, layer3_out, w3, b3); // q_dense
 
-    layer4_t layer4_out[N_LAYER_4];
-    #pragma HLS ARRAY_PARTITION variable=layer4_out complete dim=0
-    nnet::dense<layer3_t, layer4_t, config4>(layer3_out, layer4_out, w4, b4); // q_dense_1
-
-    layer5_t layer5_out[N_LAYER_4];
+    activation_t layer5_out[N_LAYER_3];
     #pragma HLS ARRAY_PARTITION variable=layer5_out complete dim=0
-    nnet::relu<layer4_t, layer5_t, relu_config5>(layer4_out, layer5_out); // q_dense_1_quantized_relu
+    nnet::relu<q_dense_t, activation_t, relu_config5>(layer3_out, layer5_out); // activation
 
-    layer6_t layer6_out[N_LAYER_6];
-    #pragma HLS ARRAY_PARTITION variable=layer6_out complete dim=0
-    nnet::dense<layer5_t, layer6_t, config6>(layer5_out, layer6_out, w6, b6); // q_dense_2
-
-    layer7_t layer7_out[N_LAYER_6];
+    q_dense_1_t layer7_out[N_LAYER_7];
     #pragma HLS ARRAY_PARTITION variable=layer7_out complete dim=0
-    nnet::relu<layer6_t, layer7_t, relu_config7>(layer6_out, layer7_out); // q_dense_2_quantized_relu
+    nnet::dense<activation_t, q_dense_1_t, config7>(layer5_out, layer7_out, w7, b7); // q_dense_1
 
-    layer8_t layer8_out[N_LAYER_8];
-    #pragma HLS ARRAY_PARTITION variable=layer8_out complete dim=0
-    nnet::dense<layer7_t, layer8_t, config8>(layer7_out, layer8_out, w8, b8); // q_dense_3
-
-    layer9_t layer9_out[N_LAYER_8];
+    activation_1_t layer9_out[N_LAYER_7];
     #pragma HLS ARRAY_PARTITION variable=layer9_out complete dim=0
-    nnet::relu<layer8_t, layer9_t, relu_config9>(layer8_out, layer9_out); // q_dense_3_quantized_relu
+    nnet::relu<q_dense_1_t, activation_1_t, relu_config9>(layer7_out, layer9_out); // activation_1
 
-    layer10_t layer10_out[N_LAYER_10];
-    #pragma HLS ARRAY_PARTITION variable=layer10_out complete dim=0
-    nnet::dense<layer9_t, layer10_t, config10>(layer9_out, layer10_out, w10, b10); // q_dense_4
-
-    layer11_t layer11_out[N_LAYER_10];
+    q_dense_2_t layer11_out[N_LAYER_11];
     #pragma HLS ARRAY_PARTITION variable=layer11_out complete dim=0
-    nnet::linear<layer10_t, layer11_t, linear_config11>(layer10_out, layer11_out); // q_dense_4_linear
+    nnet::dense<activation_1_t, q_dense_2_t, config11>(layer9_out, layer11_out, w11, b11); // q_dense_2
 
-    layer12_t layer12_out[N_LAYER_12];
-    #pragma HLS ARRAY_PARTITION variable=layer12_out complete dim=0
-    nnet::dense<layer11_t, layer12_t, config12>(layer11_out, layer12_out, w12, b12); // q_dense_6
-
-    layer13_t layer13_out[N_LAYER_12];
+    activation_2_t layer13_out[N_LAYER_11];
     #pragma HLS ARRAY_PARTITION variable=layer13_out complete dim=0
-    nnet::relu<layer12_t, layer13_t, relu_config13>(layer12_out, layer13_out); // q_dense_6_quantized_relu
+    nnet::relu<q_dense_2_t, activation_2_t, relu_config13>(layer11_out, layer13_out); // activation_2
 
-    layer14_t layer14_out[N_LAYER_14];
-    #pragma HLS ARRAY_PARTITION variable=layer14_out complete dim=0
-    nnet::dense<layer13_t, layer14_t, config14>(layer13_out, layer14_out, w14, b14); // q_dense_7
-
-    layer15_t layer15_out[N_LAYER_14];
+    q_dense_3_t layer15_out[N_LAYER_15];
     #pragma HLS ARRAY_PARTITION variable=layer15_out complete dim=0
-    nnet::relu<layer14_t, layer15_t, relu_config15>(layer14_out, layer15_out); // q_dense_7_quantized_relu
+    nnet::dense<activation_2_t, q_dense_3_t, config15>(layer13_out, layer15_out, w15, b15); // q_dense_3
 
-    layer16_t layer16_out[N_LAYER_16];
-    #pragma HLS ARRAY_PARTITION variable=layer16_out complete dim=0
-    nnet::dense<layer15_t, layer16_t, config16>(layer15_out, layer16_out, w16, b16); // q_dense_8
-
-    layer17_t layer17_out[N_LAYER_16];
+    activation_3_t layer17_out[N_LAYER_15];
     #pragma HLS ARRAY_PARTITION variable=layer17_out complete dim=0
-    nnet::linear<layer16_t, layer17_t, linear_config17>(layer16_out, layer17_out); // q_dense_8_linear
+    nnet::relu<q_dense_3_t, activation_3_t, relu_config17>(layer15_out, layer17_out); // activation_3
 
-    layer18_t layer18_out[N_LAYER_16];
-    #pragma HLS ARRAY_PARTITION variable=layer18_out complete dim=0
-    nnet::subtract<layer17_t, layer5_t, layer18_t, config18>(layer17_out, layer5_out, layer18_out); // subtract
+    q_dense_4_t layer19_out[N_LAYER_19];
+    #pragma HLS ARRAY_PARTITION variable=layer19_out complete dim=0
+    nnet::dense<activation_3_t, q_dense_4_t, config19>(layer17_out, layer19_out, w19, b19); // q_dense_4
 
-    nnet::dot1d<layer18_t, layer18_t, result_t, config19>(layer18_out, layer18_out, layer19_out); // dot
+    q_dense_6_t layer21_out[N_LAYER_21];
+    #pragma HLS ARRAY_PARTITION variable=layer21_out complete dim=0
+    nnet::dense<q_dense_4_t, q_dense_6_t, config21>(layer19_out, layer21_out, w21, b21); // q_dense_6
+
+    activation_4_t layer23_out[N_LAYER_21];
+    #pragma HLS ARRAY_PARTITION variable=layer23_out complete dim=0
+    nnet::relu<q_dense_6_t, activation_4_t, relu_config23>(layer21_out, layer23_out); // activation_4
+
+    q_dense_7_t layer25_out[N_LAYER_25];
+    #pragma HLS ARRAY_PARTITION variable=layer25_out complete dim=0
+    nnet::dense<activation_4_t, q_dense_7_t, config25>(layer23_out, layer25_out, w25, b25); // q_dense_7
+
+    activation_5_t layer27_out[N_LAYER_25];
+    #pragma HLS ARRAY_PARTITION variable=layer27_out complete dim=0
+    nnet::relu<q_dense_7_t, activation_5_t, relu_config27>(layer25_out, layer27_out); // activation_5
+
+    q_dense_8_t layer29_out[N_LAYER_29];
+    #pragma HLS ARRAY_PARTITION variable=layer29_out complete dim=0
+    nnet::dense<activation_5_t, q_dense_8_t, config29>(layer27_out, layer29_out, w29, b29); // q_dense_8
+
+    subtract_t layer31_out[N_LAYER_29];
+    #pragma HLS ARRAY_PARTITION variable=layer31_out complete dim=0
+    nnet::subtract<q_dense_8_t, activation_1_t, subtract_t, config31>(layer29_out, layer9_out, layer31_out); // subtract
+
+    nnet::dot1d<subtract_t, subtract_t, result_t, config32>(layer31_out, layer31_out, layer32_out); // dot
 
 }
 

@@ -17,7 +17,7 @@
 namespace hls4ml_axol1tl_v5 {
 
 // q_dense
-struct config2 : nnet::dense_config {
+struct config3 : nnet::dense_config {
     static const unsigned n_in = 57;
     static const unsigned n_out = 29;
     static const unsigned io_type = nnet::io_parallel;
@@ -28,24 +28,24 @@ struct config2 : nnet::dense_config {
     static const unsigned multiplier_limit = DIV_ROUNDUP(n_in * n_out, reuse_factor) - n_zeros / reuse_factor;
     static const bool store_weights_in_bram = false;
     typedef q_dense_accum_t accum_t;
-    typedef bias2_t bias_t;
-    typedef weight2_t weight_t;
-    typedef layer2_index index_t;
+    typedef q_dense_bias_t bias_t;
+    typedef q_dense_weight_t weight_t;
+    typedef layer3_index index_t;
     template<class x_T, class y_T>
     using product = nnet::product::mult<x_T, y_T>;
 };
 
-// q_dense_quantized_relu
-struct relu_config3 : nnet::activ_config {
+// activation
+struct relu_config5 : nnet::activ_config {
     static const unsigned n_in = 29;
-    static const unsigned table_size = 1024;
+    static const unsigned table_size = 2097152;
     static const unsigned io_type = nnet::io_parallel;
     static const unsigned reuse_factor = 1;
-    typedef q_dense_quantized_relu_table_t table_t;
+    typedef activation_table_t table_t;
 };
 
 // q_dense_1
-struct config4 : nnet::dense_config {
+struct config7 : nnet::dense_config {
     static const unsigned n_in = 29;
     static const unsigned n_out = 10;
     static const unsigned io_type = nnet::io_parallel;
@@ -56,24 +56,24 @@ struct config4 : nnet::dense_config {
     static const unsigned multiplier_limit = DIV_ROUNDUP(n_in * n_out, reuse_factor) - n_zeros / reuse_factor;
     static const bool store_weights_in_bram = false;
     typedef q_dense_1_accum_t accum_t;
-    typedef bias4_t bias_t;
-    typedef weight4_t weight_t;
-    typedef layer4_index index_t;
+    typedef q_dense_1_bias_t bias_t;
+    typedef q_dense_1_weight_t weight_t;
+    typedef layer7_index index_t;
     template<class x_T, class y_T>
     using product = nnet::product::mult<x_T, y_T>;
 };
 
-// q_dense_1_quantized_relu
-struct relu_config5 : nnet::activ_config {
+// activation_1
+struct relu_config9 : nnet::activ_config {
     static const unsigned n_in = 10;
-    static const unsigned table_size = 1024;
+    static const unsigned table_size = 131072;
     static const unsigned io_type = nnet::io_parallel;
     static const unsigned reuse_factor = 1;
-    typedef q_dense_1_quantized_relu_table_t table_t;
+    typedef activation_1_table_t table_t;
 };
 
 // q_dense_2
-struct config6 : nnet::dense_config {
+struct config11 : nnet::dense_config {
     static const unsigned n_in = 10;
     static const unsigned n_out = 9;
     static const unsigned io_type = nnet::io_parallel;
@@ -84,24 +84,24 @@ struct config6 : nnet::dense_config {
     static const unsigned multiplier_limit = DIV_ROUNDUP(n_in * n_out, reuse_factor) - n_zeros / reuse_factor;
     static const bool store_weights_in_bram = false;
     typedef q_dense_2_accum_t accum_t;
-    typedef bias6_t bias_t;
-    typedef weight6_t weight_t;
-    typedef layer6_index index_t;
+    typedef q_dense_2_bias_t bias_t;
+    typedef q_dense_2_weight_t weight_t;
+    typedef layer11_index index_t;
     template<class x_T, class y_T>
     using product = nnet::product::mult<x_T, y_T>;
 };
 
-// q_dense_2_quantized_relu
-struct relu_config7 : nnet::activ_config {
+// activation_2
+struct relu_config13 : nnet::activ_config {
     static const unsigned n_in = 9;
-    static const unsigned table_size = 1024;
+    static const unsigned table_size = 65536;
     static const unsigned io_type = nnet::io_parallel;
     static const unsigned reuse_factor = 1;
-    typedef q_dense_2_quantized_relu_table_t table_t;
+    typedef activation_2_table_t table_t;
 };
 
 // q_dense_3
-struct config8 : nnet::dense_config {
+struct config15 : nnet::dense_config {
     static const unsigned n_in = 9;
     static const unsigned n_out = 6;
     static const unsigned io_type = nnet::io_parallel;
@@ -112,24 +112,24 @@ struct config8 : nnet::dense_config {
     static const unsigned multiplier_limit = DIV_ROUNDUP(n_in * n_out, reuse_factor) - n_zeros / reuse_factor;
     static const bool store_weights_in_bram = false;
     typedef q_dense_3_accum_t accum_t;
-    typedef bias8_t bias_t;
-    typedef weight8_t weight_t;
-    typedef layer8_index index_t;
+    typedef q_dense_3_bias_t bias_t;
+    typedef q_dense_3_weight_t weight_t;
+    typedef layer15_index index_t;
     template<class x_T, class y_T>
     using product = nnet::product::mult<x_T, y_T>;
 };
 
-// q_dense_3_quantized_relu
-struct relu_config9 : nnet::activ_config {
+// activation_3
+struct relu_config17 : nnet::activ_config {
     static const unsigned n_in = 6;
-    static const unsigned table_size = 1024;
+    static const unsigned table_size = 65536;
     static const unsigned io_type = nnet::io_parallel;
     static const unsigned reuse_factor = 1;
-    typedef q_dense_3_quantized_relu_table_t table_t;
+    typedef activation_3_table_t table_t;
 };
 
 // q_dense_4
-struct config10 : nnet::dense_config {
+struct config19 : nnet::dense_config {
     static const unsigned n_in = 6;
     static const unsigned n_out = 4;
     static const unsigned io_type = nnet::io_parallel;
@@ -140,24 +140,15 @@ struct config10 : nnet::dense_config {
     static const unsigned multiplier_limit = DIV_ROUNDUP(n_in * n_out, reuse_factor) - n_zeros / reuse_factor;
     static const bool store_weights_in_bram = false;
     typedef q_dense_4_accum_t accum_t;
-    typedef bias10_t bias_t;
-    typedef weight10_t weight_t;
-    typedef layer10_index index_t;
+    typedef q_dense_4_bias_t bias_t;
+    typedef q_dense_4_weight_t weight_t;
+    typedef layer19_index index_t;
     template<class x_T, class y_T>
     using product = nnet::product::mult<x_T, y_T>;
 };
 
-// q_dense_4_linear
-struct linear_config11 : nnet::activ_config {
-    static const unsigned n_in = 4;
-    static const unsigned table_size = 1024;
-    static const unsigned io_type = nnet::io_parallel;
-    static const unsigned reuse_factor = 1;
-    typedef q_dense_4_linear_table_t table_t;
-};
-
 // q_dense_6
-struct config12 : nnet::dense_config {
+struct config21 : nnet::dense_config {
     static const unsigned n_in = 4;
     static const unsigned n_out = 6;
     static const unsigned io_type = nnet::io_parallel;
@@ -168,24 +159,24 @@ struct config12 : nnet::dense_config {
     static const unsigned multiplier_limit = DIV_ROUNDUP(n_in * n_out, reuse_factor) - n_zeros / reuse_factor;
     static const bool store_weights_in_bram = false;
     typedef q_dense_6_accum_t accum_t;
-    typedef bias12_t bias_t;
-    typedef weight12_t weight_t;
-    typedef layer12_index index_t;
+    typedef q_dense_6_bias_t bias_t;
+    typedef q_dense_6_weight_t weight_t;
+    typedef layer21_index index_t;
     template<class x_T, class y_T>
     using product = nnet::product::mult<x_T, y_T>;
 };
 
-// q_dense_6_quantized_relu
-struct relu_config13 : nnet::activ_config {
+// activation_4
+struct relu_config23 : nnet::activ_config {
     static const unsigned n_in = 6;
-    static const unsigned table_size = 1024;
+    static const unsigned table_size = 1048576;
     static const unsigned io_type = nnet::io_parallel;
     static const unsigned reuse_factor = 1;
-    typedef q_dense_6_quantized_relu_table_t table_t;
+    typedef activation_4_table_t table_t;
 };
 
 // q_dense_7
-struct config14 : nnet::dense_config {
+struct config25 : nnet::dense_config {
     static const unsigned n_in = 6;
     static const unsigned n_out = 9;
     static const unsigned io_type = nnet::io_parallel;
@@ -196,24 +187,24 @@ struct config14 : nnet::dense_config {
     static const unsigned multiplier_limit = DIV_ROUNDUP(n_in * n_out, reuse_factor) - n_zeros / reuse_factor;
     static const bool store_weights_in_bram = false;
     typedef q_dense_7_accum_t accum_t;
-    typedef bias14_t bias_t;
-    typedef weight14_t weight_t;
-    typedef layer14_index index_t;
+    typedef q_dense_7_bias_t bias_t;
+    typedef q_dense_7_weight_t weight_t;
+    typedef layer25_index index_t;
     template<class x_T, class y_T>
     using product = nnet::product::mult<x_T, y_T>;
 };
 
-// q_dense_7_quantized_relu
-struct relu_config15 : nnet::activ_config {
+// activation_5
+struct relu_config27 : nnet::activ_config {
     static const unsigned n_in = 9;
-    static const unsigned table_size = 1024;
+    static const unsigned table_size = 65536;
     static const unsigned io_type = nnet::io_parallel;
     static const unsigned reuse_factor = 1;
-    typedef q_dense_7_quantized_relu_table_t table_t;
+    typedef activation_5_table_t table_t;
 };
 
 // q_dense_8
-struct config16 : nnet::dense_config {
+struct config29 : nnet::dense_config {
     static const unsigned n_in = 9;
     static const unsigned n_out = 10;
     static const unsigned io_type = nnet::io_parallel;
@@ -224,34 +215,26 @@ struct config16 : nnet::dense_config {
     static const unsigned multiplier_limit = DIV_ROUNDUP(n_in * n_out, reuse_factor) - n_zeros / reuse_factor;
     static const bool store_weights_in_bram = false;
     typedef q_dense_8_accum_t accum_t;
-    typedef bias16_t bias_t;
-    typedef weight16_t weight_t;
-    typedef layer16_index index_t;
+    typedef q_dense_8_bias_t bias_t;
+    typedef q_dense_8_weight_t weight_t;
+    typedef layer29_index index_t;
     template<class x_T, class y_T>
     using product = nnet::product::mult<x_T, y_T>;
 };
 
-// q_dense_8_linear
-struct linear_config17 : nnet::activ_config {
-    static const unsigned n_in = 10;
-    static const unsigned table_size = 1024;
-    static const unsigned io_type = nnet::io_parallel;
-    static const unsigned reuse_factor = 1;
-    typedef q_dense_8_linear_table_t table_t;
-};
-
 // subtract
-struct config18 : nnet::merge_config {
-    static const unsigned n_elem = N_LAYER_16;
+struct config31 : nnet::merge_config {
+    static const unsigned n_elem = N_LAYER_29;
+    static const unsigned reuse_factor = 1;
 };
 
 // dot
-struct config19 : nnet::dot_config {
+struct config32 : nnet::dot_config {
     static const unsigned n_in = 10;
     static const unsigned n_out = 1;
     static const unsigned reuse_factor = 1;
     static const unsigned multiplier_limit = DIV_ROUNDUP(n_in, reuse_factor);
-    typedef dot_default_t accum_t;
+    typedef dot_accum_t accum_t;
     template<class x_T, class y_T>
     using product = nnet::product::mult<x_T, y_T>;
 };

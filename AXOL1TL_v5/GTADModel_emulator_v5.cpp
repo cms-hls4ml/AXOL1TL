@@ -15,7 +15,7 @@ class GTADModel_emulator_v5 : public hls4mlEmulator::Model {
 private:
     unscaled_t _unscaled_input[N_INPUT_1_1];
     input_t _scaled_input[N_INPUT_1_1];
-    result_t _result[OUT_DOT_19];
+    result_t _result[OUT_DOT_32];
     resultsq_t _loss; //identical to result in v5
 
     // scaleNNInputs function from

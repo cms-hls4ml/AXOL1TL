@@ -32,8 +32,8 @@ namespace hls4ml_axol1tl_v5 {
 
 //from https://gitlab.cern.ch/ssummers/run3_ugt_ml/-/blob/axol1tl_v5/ugt_hls/src/anomaly_detection/Axol1tl_v5.h
 void GTADModel_v5(
-	       hls4ml_axol1tl_v5::input_t input_1[hls4ml_axol1tl_v5::N_INPUT_1_1],
-	       hls4ml_axol1tl_v5::result_t layer19_out[hls4ml_axol1tl_v5::OUT_DOT_19]
+	       hls4ml_axol1tl_v5::input_t input_2[hls4ml_axol1tl_v5::N_INPUT_1_1],
+	       hls4ml_axol1tl_v5::result_t layer32_out[hls4ml_axol1tl_v5::OUT_DOT_32]
 	       );
 
 } // namespace hls4ml_axol1tl_v5
