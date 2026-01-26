@@ -21,7 +21,7 @@ private:
     result_t _result[N_OUTPUT_SIZE];
 
     // Add a loss type consistent with v5 behavior
-    using resultsq_t = result_t;
+    using resultsq_t = ap_ufixed<18, 14>;
     resultsq_t _loss = 0;
 
     virtual void _scaleNNInputs(unscaled_t unscaled[N_INPUT_SIZE],
