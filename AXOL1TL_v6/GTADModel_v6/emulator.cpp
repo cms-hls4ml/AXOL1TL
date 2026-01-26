@@ -37,59 +37,25 @@ private:
     }
 
 public:
-    //virtual void prepare_input(std::any input) override {
-      //  unscaled_t* unscaled_input_p = std::any_cast<unscaled_t*>(input);
-
-        //for (int i = 0; i < N_INPUT_SIZE; i++) {
-          //  _unscaled_input[i] = unscaled_input_p[i];
-        //}
-
-    //    _scaleNNInputs(_unscaled_input, _scaled_input);
-    //}
-
     virtual void prepare_input(std::any input) override {
-        std::cerr << "[GTADModel_v6] prepare_input: any.type = " << input.type().name() << "\n";
-        try {
-            unscaled_t* unscaled_input_p = std::any_cast<unscaled_t*>(input);
-            for (int i = 0; i < N_INPUT_SIZE; i++) {
-                _unscaled_input[i] = unscaled_input_p[i];
-            }
-            _scaleNNInputs(_unscaled_input, _scaled_input);
-            } catch (const std::bad_any_cast& e) {
-                std::cerr << "[GTADModel_v6] bad_any_cast in prepare_input: " << e.what() << "\n";
-                throw;
-              }
+        unscaled_t* unscaled_input_p = std::any_cast<unscaled_t*>(input);
+        for (int i = 0; i < N_INPUT_SIZE; i++) {
+            _unscaled_input[i] = unscaled_input_p[i];
         }
+        _scaleNNInputs(_unscaled_input, _scaled_input);
+    }
 
     virtual void predict() override {
         GTADModel_v6_project(_scaled_input, _result);
         _loss = _result[0]; //to replicate v5 behaviour
     }
 
-    //virtual void read_result(std::any result) override {
-        //result_t* result_p =
-        //    std::any_cast<result_t*>(result);
-        //for (int i = 0; i < N_OUTPUT_SIZE; i++) {
-        //    result_p[i] = _result[i];
-        // rather than above, return results as an std::pair like v5
-      //  auto *result_p = std::any_cast<std::pair<result_t, resultsq_t>*>(result);
-       // result_p->first  = _result[0];
-        //result_p->second = _loss;
-    // }
-
     virtual void read_result(std::any result) override {
-      std::cerr << "[GTADModel_v6] read_result: any.type = " << result.type().name() << "\n";
-      try {
-        auto* result_p = std::any_cast<std::pair<result_t, resultsq_t>*>(result);
+        //return results as an std::pair like v5
+        auto *result_p = std::any_cast<std::pair<result_t, resultsq_t>*>(result);
         result_p->first  = _result[0];
         result_p->second = _loss;
-      } catch (const std::bad_any_cast& e) {
-        std::cerr << "[GTADModel_v6] bad_any_cast in read_result: " << e.what() << "\n";
-        // Re-throw so CMSSW stops where it already does
-        throw;
-      }
     }
-   
 };
 
 extern "C" hls4mlEmulator::Model* create_model() {
