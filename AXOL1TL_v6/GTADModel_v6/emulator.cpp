@@ -2,6 +2,7 @@
 #include "emulator.h"
 #include "NN/nnet_utils/nnet_common.h"
 #include <any>
+#include <utility>
 #include "ap_fixed.h"
 #include "ap_int.h"
 #include "scales.h"
@@ -18,6 +19,10 @@ private:
     unscaled_t _unscaled_input[N_INPUT_SIZE];
     input_t  _scaled_input[N_INPUT_SIZE];
     result_t _result[N_OUTPUT_SIZE];
+
+    // Add a loss type consistent with v5 behavior
+    using resultsq_t = result_t;
+    resultsq_t _loss = 0;
 
     virtual void _scaleNNInputs(unscaled_t unscaled[N_INPUT_SIZE],
                                 input_t scaled[N_INPUT_SIZE])
@@ -42,15 +47,18 @@ public:
 
     virtual void predict() override {
         GTADModel_v6_project(_scaled_input, _result);
+        _loss = _result[0]; //to replicate v5 behaviour
     }
 
     virtual void read_result(std::any result) override {
-        result_t* result_p =
-            std::any_cast<result_t*>(result);
-
-        for (int i = 0; i < N_OUTPUT_SIZE; i++) {
-            result_p[i] = _result[i];
-        }
+        //result_t* result_p =
+        //    std::any_cast<result_t*>(result);
+        //for (int i = 0; i < N_OUTPUT_SIZE; i++) {
+        //    result_p[i] = _result[i];
+        // rather than above, return results as an std::pair like v5
+        auto *result_p = std::any_cast<std::pair<result_t, resultsq_t>*>(result);
+        result_p->first  = _result[0];
+        result_p->second = _loss;
     }
 };
 
