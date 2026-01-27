@@ -1,6 +1,6 @@
 .PHONY: clean
 
-GTADModel_v6.so: emulator.o GTADModel_v6.o
+GTADModel_v6.so: emulator.o GTADModel_v6_project.o
 	$(CXX) $(CXXFLAGS) $(LD_FLAGS) -shared $^ -o $@
 
 %.o: NN/%.cpp
@@ -10,4 +10,4 @@ GTADModel_v6.so: emulator.o GTADModel_v6.o
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	rm emulator.o GTADModel_v6.o GTADModel_v6.so
+	rm -f emulator.o GTADModel_v6_project.o GTADModel_v6.so
