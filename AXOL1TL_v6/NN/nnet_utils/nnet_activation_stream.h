@@ -228,7 +228,7 @@ SoftmaxArrayLoop:
         Op_add<typename CONFIG_T::accum_t> op_add;
         exp_sum = reduce<typename CONFIG_T::accum_t, data_T::size, Op_add<typename CONFIG_T::accum_t>>(exp_res, op_add);
 
-        typename CONFIG_T::inv_table_t inv_exp_sum =
+        typename CONFIG_T::accum_t inv_exp_sum =
             invert_table[softmax_idx_from_real_val<typename CONFIG_T::inv_inp_t, CONFIG_T::inv_table_size>(exp_sum)];
 
         res_T out_pack;
@@ -750,25 +750,21 @@ PReLUActLoop:
 // *************************************************
 template <class data_T, class res_T, typename CONFIG_T>
 void binary_tanh(hls::stream<data_T> &data, hls::stream<res_T> &res) {
-    using cache_T = ap_int<2>;
 PReLUActLoop:
     for (int i = 0; i < CONFIG_T::n_in / res_T::size; i++) {
         #pragma HLS PIPELINE
 
         data_T in_data = data.read();
-        cache_T cache;
         res_T out_data;
         PRAGMA_DATA_PACK(out_data)
 
     PReLUPackLoop:
         for (int j = 0; j < res_T::size; j++) {
             #pragma HLS UNROLL
-            if (in_data[j] >= 0)
-                cache = 1;
+            if (in_data[j] > 0)
+                out_data[j] = (typename res_T::value_type)1;
             else
-                cache = -1;
-
-            out_data[j] = binary_cast<cache_T, typename res_T::value_type>(cache);
+                out_data[j] = (typename res_T::value_type) - 1;
         }
         res.write(out_data);
     }

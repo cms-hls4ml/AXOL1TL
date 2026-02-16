@@ -3,7 +3,6 @@
 
 #include "hls_stream.h"
 #include "nnet_common.h"
-#include "nnet_dense.h"
 #include "nnet_dense_latency.h"
 #include "nnet_dense_resource.h"
 #include "nnet_function_stubs.h"
@@ -31,6 +30,7 @@ struct einsum_dense_config {
     static const unsigned strategy = latency;
     static const unsigned reuse_factor = 1;
     static const unsigned parallelization_factor = 1000; // Only useful when n_inplace > 1
+    static const bool store_weights_in_bram = false;     // NOT USED
 
     // Product function to use
     template <class x_T, class y_T> using product = nnet::product::mult<x_T, y_T>;

@@ -1,9 +1,9 @@
 #ifndef __ADT_SCALES_H
 #define __ADT_SCALES_H
 
-#include "NN/GTADModel_v6_project.h"
+#include "NN/GTADModel_v6.h"
 
-namespace hls4ml_axol1tl_v6 {
+namespace hls4ml_axol1tl_v6{
 
 typedef ap_fixed<5,5> ad_shift_t;
 typedef ap_fixed<10,10> ad_offset_t;
@@ -18,4 +18,3 @@ const ad_offset_t ad_offsets[57] = {
 
 } // namespace hls4ml_axol1tl_v6
 #endif
-

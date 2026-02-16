@@ -152,8 +152,6 @@ void init_exp_table(typename CONFIG_T::exp_table_t table_out[CONFIG_T::exp_table
         // Slicing bits for address is going to round towards 0, so take the central value
         float x = softmax_real_val_from_idx<data_T, CONFIG_T::exp_table_size>(i) * CONFIG_T::exp_scale;
         if (negative) {
-            // for normalized inputs, we keep the normalization values positive (x_bar = x_max - x)
-            // so we need to negate the input (exp(-x_bar) = exp(x - x_max))
             x = -x;
         }
         typename CONFIG_T::exp_table_t exp_x = exp_fcn_float(x);
@@ -742,27 +740,19 @@ template <class data_T, class res_T, typename CONFIG_T> void selu(data_T data[CO
         initialized = true;
     }
 
-    typedef ap_ufixed<16, 1> selu_const_t;
-    static const selu_const_t lambda = 1.0507009873554805;
-
     #pragma HLS PIPELINE
+
+    data_T datareg;
+    // Index into the lookup table based on data
+    int index;
     for (int ii = 0; ii < CONFIG_T::n_in; ii++) {
-        data_T datareg = data[ii];
-
+        datareg = data[ii];
         if (datareg >= 0) {
-            // Positive branch  y = λ · x
-            res[ii] = lambda * datareg;
+            res[ii] = res_T(1.0507009873554804934193349852946) * datareg;
         } else {
-            // Negative branch  y = table(x)
-            int index = datareg * CONFIG_T::table_size / -8;
-
-            // clamp index to [0, table_size-1]
-            if (index < 0)
-                index = 0;
-            else if (index > CONFIG_T::table_size - 1) {
+            index = datareg * CONFIG_T::table_size / -8;
+            if (index > CONFIG_T::table_size - 1)
                 index = CONFIG_T::table_size - 1;
-            }
-
             res[ii] = selu_table[index];
         }
     }
@@ -785,34 +775,23 @@ void prelu(data_T data[CONFIG_T::n_in], param_T alpha[CONFIG_T::n_in], res_T res
     }
 }
 
-template <class data_T, class res_T>
-inline typename std::enable_if<(!std::is_same<res_T, ap_uint<1>>::value), res_T>::type binary_cast(data_T data) {
-    return static_cast<res_T>(data);
-}
-
-// should choose this via function overloading
-template <class data_T, class res_T>
-inline typename std::enable_if<(std::is_same<res_T, ap_uint<1>>::value), res_T>::type binary_cast(data_T data) {
-    return (data > 0) ? static_cast<res_T>(data) : static_cast<res_T>(0);
-}
-
 // *************************************************
 //       Binary TanH Activation
 // *************************************************
 template <class data_T, class res_T, typename CONFIG_T>
 void binary_tanh(data_T data[CONFIG_T::n_in], res_T res[CONFIG_T::n_in]) {
     #pragma HLS PIPELINE
-    using cache_T = ap_int<2>;
+
     data_T datareg;
-    cache_T cache;
+    res_T cache;
     for (int ii = 0; ii < CONFIG_T::n_in; ii++) {
         datareg = data[ii];
-        if (datareg >= 0)
+        if (datareg > 0)
             cache = 1;
         else
             cache = -1;
 
-        res[ii] = binary_cast<cache_T, res_T>(cache);
+        res[ii] = (res_T)cache;
     }
 }
 
