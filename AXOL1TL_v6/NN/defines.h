@@ -66,40 +66,5 @@ typedef ap_uint<1> layer29_index;
 typedef ap_fixed<18,11> subtract_t;
 typedef ap_fixed<37,23> dot_accum_t;
 
-//from weights.h 
-typedef ap_fixed<6,3> q_dense_weight_t;
-typedef ap_fixed<10,7> q_dense_bias_t;
-typedef ap_fixed<6,3> q_dense_1_weight_t;
-typedef ap_fixed<10,7> q_dense_1_bias_t;
-typedef ap_fixed<6,3> q_dense_2_weight_t;
-typedef ap_fixed<10,7> q_dense_2_bias_t;
-typedef ap_fixed<6,3> q_dense_3_weight_t;
-typedef ap_fixed<10,7> q_dense_3_bias_t;
-typedef ap_fixed<6,3> q_dense_4_weight_t;
-typedef ap_fixed<10,7> q_dense_4_bias_t;
-typedef ap_fixed<6,3> q_dense_6_weight_t;
-typedef ap_fixed<10,7> q_dense_6_bias_t;
-typedef ap_fixed<6,3> q_dense_7_weight_t;
-typedef ap_fixed<10,7> q_dense_7_bias_t;
-typedef ap_fixed<6,3> q_dense_8_weight_t;
-typedef ap_fixed<10,7> q_dense_8_bias_t;
-
-extern q_dense_weight_t w3[1653];
-extern q_dense_bias_t b3[29];
-extern q_dense_1_weight_t w7[290];
-extern q_dense_1_bias_t b7[10];
-extern q_dense_2_weight_t w11[90];
-extern q_dense_2_bias_t b11[9];
-extern q_dense_3_weight_t w15[54];
-extern q_dense_3_bias_t b15[6];
-extern q_dense_4_weight_t w19[24];
-extern q_dense_4_bias_t b19[4];
-extern q_dense_6_weight_t w21[24];
-extern q_dense_6_bias_t b21[6];
-extern q_dense_7_weight_t w25[54];
-extern q_dense_7_bias_t b25[9];
-extern q_dense_8_weight_t w29[90];
-extern q_dense_8_bias_t b29[10];
-
 } // namespace hls4ml_axol1tl_v6
 #endif

@@ -14,8 +14,6 @@
  
 //hls-fpga-machine-learning insert weights
 #include "defines.h"
-#include "weights.h"
-
 namespace hls4ml_axol1tl_v6 {
 
 // hls-fpga-machine-learning insert layer-config
