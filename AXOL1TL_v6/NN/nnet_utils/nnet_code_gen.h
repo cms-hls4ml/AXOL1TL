@@ -11,6 +11,8 @@
 
 namespace GTADModel_v6 {
 
+using nnet::bit_shift;
+
 template <class data_T, class res_T, typename CONFIG_T> class PointwiseConv1D {
   public:
     static void pointwise_conv(data_T data[CONFIG_T::in_width * CONFIG_T::n_chan],
